@@ -80,6 +80,11 @@ class App extends Component {
   render() {
     return (
       <Fragment>
+        {this.state.editingPizza.saved === true ? (
+          <div class="alert alert-success" role="alert">
+            Changes Saved!
+          </div>
+        ) : null}
         <Header />
         <PizzaForm
           patchApi={this.patchApi}

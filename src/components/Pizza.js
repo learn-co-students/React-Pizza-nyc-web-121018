@@ -11,7 +11,7 @@ const Pizza = props => {
           data-id={props.pizza.id}
           onClick={props.editHandler}
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary "
         >
           Edit Pizza
         </button>
