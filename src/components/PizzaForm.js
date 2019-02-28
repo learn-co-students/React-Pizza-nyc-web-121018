@@ -1,16 +1,42 @@
-import React from "react"
+import React, { Component } from "react";
 
-const PizzaForm = () => {
-  return(
+class PizzaForm extends Component {
+  submitListener = e => {
+    this.props.patchApi();
+  };
+
+  changeSize = e => {
+    this.props.changeSize(e);
+  };
+
+  changeTopping = e => {
+    console.log("changing topping");
+    this.props.changeTopping(e);
+  };
+
+  changeVegetarian = e => {
+    console.log("changing vego");
+    this.props.changeVegetarian(e);
+  };
+
+  render() {
+    return (
       <div className="form-row">
         <div className="col-5">
-            <input type="text" className="form-control" placeholder="Pizza Topping" value={
-                //Pizza Topping Should Go Here
-                null
-              }/>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Pizza Topping"
+            value={this.props.editingPizza.topping}
+            onChange={this.changeTopping}
+          />
         </div>
         <div className="col">
-          <select value={null} className="form-control">
+          <select
+            onChange={this.changeSize}
+            value={this.props.editingPizza.size}
+            className="form-control"
+          >
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
@@ -18,24 +44,44 @@ const PizzaForm = () => {
         </div>
         <div className="col">
           <div className="form-check">
-            <input className="form-check-input" type="radio" value="Vegetarian" checked={null}/>
-            <label className="form-check-label">
-              Vegetarian
-            </label>
+            <input
+              onChange={this.changeVegetarian}
+              className="form-check-input"
+              type="radio"
+              value="Vegetarian"
+              checked={
+                this.props.editingPizza.vegetarian === true ? true : false
+              }
+            />
+            <label className="form-check-label">Vegetarian</label>
           </div>
           <div className="form-check">
-            <input className="form-check-input" type="radio" value="Not Vegetarian" checked={null}/>
-            <label className="form-check-label">
-              Not Vegetarian
-            </label>
+            <input
+              onChange={this.changeVegetarian}
+              className="form-check-input"
+              type="radio"
+              value="Not Vegetarian"
+              checked={
+                this.props.editingPizza.vegetarian === true ? false : true
+              }
+            />
+            <label className="form-check-label">Not Vegetarian</label>
           </div>
         </div>
         <div className="col">
-          <button type="submit" className="btn btn-success" onClick={console.log}>Submit</button>
+          <button
+            data-id={this.props.editingPizza.id}
+            type="submit"
+            className="btn btn-success"
+            onClick={this.submitListener}
+          >
+            Submit
+          </button>
+          {this.props.editingPizza.saved === true ? <p>saved</p> : null}
         </div>
       </div>
-
-  )
+    );
+  }
 }
 
-export default PizzaForm
+export default PizzaForm;
