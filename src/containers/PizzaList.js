@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import Pizza from '../components/Pizza'
+import React, { Component } from "react";
+import Pizza from "../components/Pizza";
 class PizzaList extends Component {
-
   render() {
     return (
       <table className="table table-striped">
@@ -14,14 +13,24 @@ class PizzaList extends Component {
           </tr>
         </thead>
         <tbody>
-          {
-            //render Pizza here
-          }
+          {this.props.pizzas.map(p => (
+            <Pizza key={p.id} editHandler={this.props.editHandler} pizza={p} />
+          ))}
         </tbody>
       </table>
     );
   }
-
 }
 
 export default PizzaList;
+
+// <tr data-id={p.id} key={p.id}>
+//   <td>{p.topping}</td>
+//   <td>{p.size}</td>
+//   <td>{p.vegetarian === false ? "no" : "yes"}</td>
+//   <td>
+//     <button data-id={p.id} onClick={this.editHandler}>
+//       {" "}
+//       Edit{" "}
+//     </button>
+//   </td>
